@@ -29,6 +29,8 @@ public class CategoryController {
 
 		return model;
 	}
+	
+	
 
 	@RequestMapping(value = "/searchCategory")
 	public ModelAndView searchCategory(HttpServletRequest request, ModelAndView model) {

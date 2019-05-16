@@ -160,7 +160,7 @@ public class ProductController {
 		Product product = new Product();
 
 		// Load C1tegory Dropdown
-		List<Category> listCategory = dao1.getAllCategory();
+		List<Category> listCategory = dao1.getAllCategoryActivated();
 
 		model.addObject("product", product);
 

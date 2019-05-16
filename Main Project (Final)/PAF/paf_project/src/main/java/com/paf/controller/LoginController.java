@@ -81,8 +81,8 @@ public class LoginController {
 		}
 		
 		else {
-			List<Category> listCategory = dao3.getAllCategory();
-			List<Product> listProduct = dao4.getAllProduct();
+			List<Category> listCategory = dao3.getAllCategoryActivated();
+			List<Product> listProduct = dao4.getAllProductActivated();
 			model.addObject("listCategory", listCategory);
 			model.addObject("listProduct", listProduct);
 			model.setViewName("home");

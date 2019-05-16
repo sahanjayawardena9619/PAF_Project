@@ -60,6 +60,20 @@ public class CategoryDao {
 			}
 		});
 	}
+	
+	public List<Category> getAllCategoryActivated() {
+		return template.query("select * from category where status = 'active'", new RowMapper<Category>() {
+			public Category mapRow(ResultSet rs, int row) throws SQLException {
+				Category c = new Category();
+				c.setCatID(rs.getInt(1));
+				c.setDescription(rs.getString(2));
+				c.setCatName(rs.getString(3));
+				c.setStatus(rs.getString(4));
+				c.setAddedDate(rs.getString(5));
+				return c;
+			}
+		});
+	}
 
 	public List searchCategory(String srch) {
 		String search = "%" + srch + "%";

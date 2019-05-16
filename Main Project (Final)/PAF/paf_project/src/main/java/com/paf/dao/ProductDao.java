@@ -87,6 +87,26 @@ public class ProductDao {
 		});
 	}
 	
+	public List<Product> getAllProductActivated() {
+		return template.query("select * from product where admin = 'active' and status = 'active'", new RowMapper<Product>() {
+			public Product mapRow(ResultSet rs, int row) throws SQLException {
+				Product c = new Product();
+				c.setPrID(rs.getInt(1));
+				c.setSuppID(rs.getInt(2));
+				c.setName(rs.getString(3));
+				c.setDescription(rs.getString(4));
+				c.setUnitPrice(rs.getString(5));
+				c.setBrand(rs.getString(6));
+				c.setCatID(rs.getInt(7));
+				c.setProdImage(rs.getString(8));
+				c.setAddedDate(rs.getString(9));
+				c.setStatus(rs.getString(10));
+				c.setAdmin(rs.getString(11));
+				return c;
+			}
+		});
+	}
+	
 	public List<Product> getAllProductSeller(int suppID) {
 		return template.query(" select * from product where suppID = '"+suppID+"' ", new RowMapper<Product>() {
 			public Product mapRow(ResultSet rs, int row) throws SQLException {
