@@ -3,6 +3,7 @@ package com.paf.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.swing.JOptionPane;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +25,19 @@ public class PaymentController {
 	public PaymentDao dao;
 
 	@RequestMapping(value = "/viewAllPayment")
-	public ModelAndView viewAllPayment(ModelAndView model) {
-		List<Payment> listPayment = dao.getAllPayment();
-		model.addObject("listPayment", listPayment);
-		model.setViewName("payment");
+	public ModelAndView viewAllPayment(ModelAndView model, HttpSession session) {
+		if(session.getAttribute("emailAdmin") == null) {
+			return new ModelAndView("redirect:/adminDashboard");
+		}
+		
+		else {
+			List<Payment> listPayment = dao.getAllPayment();
+			model.addObject("listPayment", listPayment);
+			model.setViewName("payment");
 
-		return model;
+			return model;
+		}
+		
 	}
 
 	@RequestMapping(value = "/searchPayment")

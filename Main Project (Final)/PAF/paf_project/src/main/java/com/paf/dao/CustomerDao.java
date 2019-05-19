@@ -5,8 +5,10 @@ import java.sql.SQLException;
 import java.util.List;
 
 import javax.sql.DataSource;
+import javax.swing.JOptionPane;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -28,13 +30,22 @@ public class CustomerDao {
 				+ "', '" + customer.getPhone() + "', '" + customer.getCountry() + "'," + "'" + customer.getDob()
 				+ "', '" + customer.getCity() + "', '" + customer.getPostal() + "', '" + customer.getAddress1() + "', '"
 				+ customer.getAddress2() + "'," + "'" + customer.getPassword() + "', NOW(), 'active')";
-		return template.update(sql);
+		
+		
+		try
+		{
+			return template.update(sql);
+		}
+		catch (DataAccessException e)
+		{
+		   return 2;
+		}
 
 	}
 
 	public int edit(Customer customer) {
 		String sql = "update customer set fname = '" + customer.getFname() + "', lname = '" + customer.getLname()
-				+ "', email = '" + customer.getEmail() + "'," + " phone = '" + customer.getPhone() + "', country = '"
+				+ "', phone = '" + customer.getPhone() + "', country = '"
 				+ customer.getCountry() + "', dob = '" + customer.getDob() + "', city = '" + customer.getCity() + "', "
 				+ "postal = '" + customer.getPostal() + "', address1 = '" + customer.getAddress1() + "', address2 = '"
 				+ customer.getAddress2() + "', " + "password = '" + customer.getPassword() + "' where cusID = '"

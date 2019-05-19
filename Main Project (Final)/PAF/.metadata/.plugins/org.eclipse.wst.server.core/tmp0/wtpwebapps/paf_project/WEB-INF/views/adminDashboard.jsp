@@ -15,7 +15,7 @@
 <script src="/resources/js/bootstrap.min.js"></script>
 
 <%
-	if(session.getAttribute("email") == null){
+	if(session.getAttribute("emailAdmin") == null){
 		response.sendRedirect("/paf_project/admin");
 	}
 

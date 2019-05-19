@@ -136,7 +136,7 @@ public class LoginController {
 
 			session.invalidate();
 			HttpSession newSession = request.getSession();
-			newSession.setAttribute("email", un);
+			newSession.setAttribute("emailAdmin", un);
 			return new ModelAndView("redirect:/adminDashboard");
 		}
 
@@ -173,7 +173,7 @@ public class LoginController {
 			}
 
 			else if (x == 2) {
-				JOptionPane.showMessageDialog(null, "Sorry you account has been temporarily banned!", "Unsuccessfull",
+				JOptionPane.showMessageDialog(null, "Sorry your account has been temporarily banned!", "Unsuccessfull",
 						JOptionPane.ERROR_MESSAGE);
 				return new ModelAndView("redirect:/");
 			}

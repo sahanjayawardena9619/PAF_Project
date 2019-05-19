@@ -7,6 +7,7 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -23,20 +24,26 @@ public class SellerDao {
 
 	public int add(Seller seller) {
 		String sql = "INSERT INTO seller(company, fname, lname, email, phone, country, dob, city, password, state, address1, address2, regDate, status) "
-				+ "VALUES ('" + seller.getCompany() + "', '" + seller.getFname() + "', '" + seller.getLname() + "', '" + seller.getEmail()+"',"
-				+ " '" + seller.getPhone() + "', '" + seller.getCountry() + "', '" + seller.getDob() + "', '" + seller.getCity() + "', '"+ seller.getPassword() + "', "
-				+ "'"+seller.getState() + "', '" + seller.getAddress1() + "', '"+seller.getAddress2()+"', NOW(), 'active')";
-		return template.update(sql);
+				+ "VALUES ('" + seller.getCompany() + "', '" + seller.getFname() + "', '" + seller.getLname() + "', '"
+				+ seller.getEmail() + "'," + " '" + seller.getPhone() + "', '" + seller.getCountry() + "', '"
+				+ seller.getDob() + "', '" + seller.getCity() + "', '" + seller.getPassword() + "', " + "'"
+				+ seller.getState() + "', '" + seller.getAddress1() + "', '" + seller.getAddress2()
+				+ "', NOW(), 'active')";
+		try {
+			return template.update(sql);
+		} catch (DataAccessException e) {
+			return 2;
+		}
 
 	}
 
 	public int edit(Seller seller) {
-		String sql = "update seller set company = '"+seller.getCompany()+"', fname = '" + seller.getFname() + "', lname = '" + seller.getLname()
-				+ "', email = '" + seller.getEmail() + "'," + " phone = '" + seller.getPhone() + "', country = '"
-				+ seller.getCountry() + "', dob = '" + seller.getDob() + "', city = '" + seller.getCity() + "', "
-				+ "address1 = '" + seller.getAddress1() + "', state = '"+seller.getState()+"', "
-				+ "address2 = '"+seller.getAddress2() + "', password = '" + seller.getPassword() + "' where suppID = '"
-				+ seller.getSuppID() + "'";
+		String sql = "update seller set company = '" + seller.getCompany() + "', fname = '" + seller.getFname()
+				+ "', lname = '" + seller.getLname() + "', phone = '"
+				+ seller.getPhone() + "', country = '" + seller.getCountry() + "', dob = '" + seller.getDob()
+				+ "', city = '" + seller.getCity() + "', " + "address1 = '" + seller.getAddress1() + "', state = '"
+				+ seller.getState() + "', " + "address2 = '" + seller.getAddress2() + "', password = '"
+				+ seller.getPassword() + "' where suppID = '" + seller.getSuppID() + "'";
 
 		return template.update(sql);
 
@@ -50,8 +57,7 @@ public class SellerDao {
 
 	public Seller getSeller(int suppID) {
 		String sql = "select * from seller where suppID = ?";
-		return template.queryForObject(sql, new Object[] { suppID },
-				new BeanPropertyRowMapper<Seller>(Seller.class));
+		return template.queryForObject(sql, new Object[] { suppID }, new BeanPropertyRowMapper<Seller>(Seller.class));
 	}
 
 	public List<Seller> getAllSeller() {
@@ -80,11 +86,12 @@ public class SellerDao {
 
 	public List searchSeller(String srch) {
 		String search = "%" + srch + "%";
-		String sql = "select * from seller where suppID like '" + search + "' OR company like '"+search+"' OR fname like '" + search
-				+ "' OR lname like '" + search + "' OR email like '" + search + "'" + " OR phone like '" + search
-				+ "' OR country like '" + search + "' OR dob like '" + search + "' OR city like '" + search + "'"
-				+ " OR state like '"+search+"' OR address1 like '" + search + "' OR address2 like '" + search
-				+ "' OR regDate like '" + search + "' OR status like '" + search + "'";
+		String sql = "select * from seller where suppID like '" + search + "' OR company like '" + search
+				+ "' OR fname like '" + search + "' OR lname like '" + search + "' OR email like '" + search + "'"
+				+ " OR phone like '" + search + "' OR country like '" + search + "' OR dob like '" + search
+				+ "' OR city like '" + search + "'" + " OR state like '" + search + "' OR address1 like '" + search
+				+ "' OR address2 like '" + search + "' OR regDate like '" + search + "' OR status like '" + search
+				+ "'";
 		return template.queryForList(sql);
 	}
 
@@ -116,14 +123,12 @@ public class SellerDao {
 
 	public int getSellerID(String un, String pw) {
 
-	
-			String sql = "select suppID from seller where email = '" + un + "' AND password = '" + pw
-					+ "' AND status = 'active'";
+		String sql = "select suppID from seller where email = '" + un + "' AND password = '" + pw
+				+ "' AND status = 'active'";
 
-			int cusID = template.queryForObject(sql, Integer.class);
-			return cusID;
-		
+		int cusID = template.queryForObject(sql, Integer.class);
+		return cusID;
 
 	}
-	
+
 }

@@ -1,3 +1,9 @@
+<%
+	if(session.getAttribute("emailAdmin") == null){
+		response.sendRedirect("/paf_project/admin");
+	}
+
+%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ include file="/WEB-INF/views/includes.jsp"%>

@@ -65,16 +65,6 @@
 								<div class="form-group row">
 									<label for="email_address"
 										class="col-md-4 col-form-label text-md-right"><h4>
-											Email</h4></label>
-									<div class="col-md-6">
-										<form:input type="email" class="form-control" path="email"
-											name="email" required="required" autofocus="autofocus" />
-									</div>
-								</div>
-
-								<div class="form-group row">
-									<label for="email_address"
-										class="col-md-4 col-form-label text-md-right"><h4>
 											Phone</h4></label>
 									<div class="col-md-6">
 										<form:input type="text" class="form-control" path="phone"

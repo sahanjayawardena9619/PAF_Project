@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 19, 2019 at 12:47 PM
+-- Generation Time: May 19, 2019 at 02:22 PM
 -- Server version: 10.1.9-MariaDB
 -- PHP Version: 5.5.30
 
@@ -193,12 +193,7 @@ CREATE TABLE `customer` (
 --
 
 INSERT INTO `customer` (`cusID`, `fname`, `lname`, `email`, `phone`, `country`, `dob`, `city`, `postal`, `address1`, `address2`, `password`, `regDate`, `status`) VALUES
-(1, 'Sahan', 'Jayawardena', 'sahanlakshitha1996@hotmail.com', '0711594019', 'Colombo', '2012-01-02', 'ddfdf', '1223', '204/1, Werahera, Boralesgamuwa', 'Boralesgamuwa.', 'kuma12345', '2019-04-25', 'active'),
-(2, 'Sahan', 'Jayawardena', 'sahanlakshitha1996@hotmail.com2', '0711594019', 'Sri Lanka', '2012-01-02', 'qwerty1', '11234', '204/1, Werahera, Boralesgamuwa', 'Boralesgamuwaa', 'assd', '2019-04-25', 'inactive'),
-(3, 'Sahan', 'Jayawardena', 'sahanlakshitha1996@hotmail.commm', '0711594019', 'Sri Lanka', '2014-02-02', 'Trinco', '10290', '204/1, Werahera, Boralesgamuwa', 'Boralesgamuwa', 'assd', '2019-04-26', 'active'),
-(4, 'Sahan12', 'Jayawardena12', 'sahanlakshitha1996@hotmail.com1', '07115940192', 'Russia1', '2012-12-02', 'Jakartha', '10290', '204/1, Werahera, Boralesgamuwaa', 'Boralesgamuwaa', 'assd', '2019-04-26', 'active'),
-(5, 'Saman', 'Rajakumara', 'saman@gmail.com', '0711594019', 'Russia', '1996-04-19', 'Boralesgamuwa', '10290', '204/1, Gangarama Road, ', 'Boralesgamuwa', 'Kuma123456.', '2019-04-27', 'active'),
-(6, 'Pasan', 'Jayawardena', 'pasan@gmail.com', '0718412070', 'Sri Lanka', '1992-12-05', 'Colombo', '10241', '204/1, Boralesgamuwa', 'Nugegoda', 'Pasan12345', '2019-04-30', 'inactive');
+(1, 'Sahan', 'Jayawardena', 'sahanlakshitha1996@hotmail.com', '0711594019', 'Colombo', '2012-01-02', 'ddfdf', '1223', '204/1, Werahera, Boralesgamuwa', 'Boralesgamuwa.', 'kuma12345', '2019-04-25', 'active');
 
 -- --------------------------------------------------------
 
@@ -283,8 +278,9 @@ CREATE TABLE `seller` (
 --
 
 INSERT INTO `seller` (`suppID`, `company`, `fname`, `lname`, `email`, `phone`, `country`, `dob`, `city`, `password`, `state`, `address1`, `address2`, `regDate`, `status`) VALUES
-(1, 'Test Company1', 'Sahan1', 'Jay1', 'sahanjay@gmail.com1', '07115940191', 'Sri Lanka1', '1992-04-18', 'Colombo1', 'Kuma12345.', 'SL', '204/1, Werahera,1', 'Boralesgamuwa1', '2019-04-18', 'active'),
-(2, 'Niri Selling', 'Nirmani', 'Jayawardena', 'nirmani@gmail.com', '0718413090', 'Sri Lanka', '1997-12-09', 'Colombo', 'nirmani1234', 'BC', '204/1, Gangarama Rd,', 'Boralesgamuwa', '2019-04-30', 'active');
+(1, 'Test Company1', 'Sahan1', 'Jay1', 'sahanjay@gmail.com1', '07115940191', 'Sri Lanka1', '1992-04-18', 'Colombo1', 'Kuma12345.', 'SL', '204/1, Werahera,1', 'Boralesgamuwa1', '2019-04-18', 'inactive'),
+(2, 'Niri Selling', 'Nirmani', 'Jayawardena', 'nirmani@gmail.com', '0718413090', 'Sri Lanka', '1997-12-09', 'Colombo', 'nirmani1234', 'BC', '204/1, Gangarama Rd,', 'Boralesgamuwa', '2019-04-30', 'active'),
+(5, 'Neem Ads', 'ssd', 'Jayawardena', 'nirmani@gmail.com2', '0711594019', 'Sri Lanka', '1995-12-21', 'asdsadfsf', 's123', 'SL', '204/1, Werahera', 'Boralesgamuwa', '2019-05-19', 'active');
 
 -- --------------------------------------------------------
 
@@ -304,7 +300,7 @@ CREATE TABLE `shipping` (
 --
 
 INSERT INTO `shipping` (`shipID`, `company`, `status`, `addedDate`) VALUES
-(1, 'Ship Company1', 'active', '2019-04-17'),
+(1, 'Ship Company 5', 'active', '2019-04-17'),
 (2, 'Asad Sali', 'active', '2019-04-26'),
 (3, 'DHL', 'active', '2019-04-19'),
 (4, 'Test Shipment', 'active', '2019-05-01');
@@ -347,7 +343,8 @@ ALTER TABLE `cusorder`
 -- Indexes for table `customer`
 --
 ALTER TABLE `customer`
-  ADD PRIMARY KEY (`cusID`);
+  ADD PRIMARY KEY (`cusID`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- Indexes for table `payment`
@@ -365,7 +362,8 @@ ALTER TABLE `product`
 -- Indexes for table `seller`
 --
 ALTER TABLE `seller`
-  ADD PRIMARY KEY (`suppID`);
+  ADD PRIMARY KEY (`suppID`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- Indexes for table `shipping`
@@ -406,7 +404,7 @@ ALTER TABLE `cusorder`
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `cusID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `cusID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `payment`
 --
@@ -421,7 +419,7 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `seller`
 --
 ALTER TABLE `seller`
-  MODIFY `suppID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `suppID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `shipping`
 --

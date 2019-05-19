@@ -35,7 +35,6 @@ public class ProductController {
 
 		return model;
 	}
-	
 
 	@RequestMapping(value = "/searchProduct")
 	public ModelAndView searchProduct(HttpServletRequest request, ModelAndView model) {
@@ -46,61 +45,55 @@ public class ProductController {
 
 		return model;
 	}
-	
+
 	@RequestMapping(value = "/searchProductSeller")
 	public ModelAndView searchProductSeller(HttpServletRequest request, ModelAndView model, HttpSession session) {
 		String val = request.getParameter("searchVal");
 		int suppID = Integer.parseInt(session.getAttribute("userIDSeller").toString());
-		
+
 		List<Product> listProductSeller = dao.searchProductSupplier(val, suppID);
 		model.addObject("listProductSeller", listProductSeller);
 		model.setViewName("SellerProduct");
 
 		return model;
 	}
-	
+
 	@RequestMapping(value = "/searchProductHome")
 	public ModelAndView searchProductHome(HttpServletRequest request, ModelAndView model) {
 		String val = request.getParameter("searchVal");
 		List<Product> listProduct = dao.searchProduct(val);
 		List<Category> listCategory = dao1.getAllCategory();
-		
-		if(listProduct.isEmpty()) {
+
+		if (listProduct.isEmpty()) {
 			return new ModelAndView("redirect:/");
 		}
-		
+
 		else {
 			model.addObject("listProduct", listProduct);
 			model.addObject("listCategory", listCategory);
 			model.setViewName("index");
 			return model;
 		}
-		
-		
 
-		
 	}
-	
+
 	@RequestMapping(value = "/clickCategory")
 	public ModelAndView clickCategory(HttpServletRequest request, ModelAndView model) {
 		int catID = Integer.valueOf(request.getParameter("catID"));
 		List<Product> listProduct = dao.clickCategory(catID);
 		List<Category> listCategory = dao1.getAllCategory();
-		
-		if(listProduct.isEmpty()) {
+
+		if (listProduct.isEmpty()) {
 			return new ModelAndView("redirect:/");
 		}
-		
+
 		else {
 			model.addObject("listProduct", listProduct);
 			model.addObject("listCategory", listCategory);
 			model.setViewName("index");
 			return model;
 		}
-		
-		
 
-		
 	}
 
 	@RequestMapping(value = "/deleteProduct", method = RequestMethod.GET)
@@ -122,13 +115,14 @@ public class ProductController {
 				JOptionPane.showMessageDialog(null, "Product Deactivated Sucessfully by Admin!", "Activation",
 						JOptionPane.INFORMATION_MESSAGE);
 			}
+			return new ModelAndView("redirect:/viewAllProduct");
 		}
-		
-		else if(user.equals("seller")) {
-			
-			if(dao.checkAdminStatus(prID) == 1) {
+
+		else if (user.equals("seller")) {
+
+			if (dao.checkAdminStatus(prID) == 1) {
 				dao.delete(prID, comm);
-				
+
 				if (comm.equals("active")) {
 					JOptionPane.showMessageDialog(null, "Product Activated Sucessfully!", "Activation",
 							JOptionPane.INFORMATION_MESSAGE);
@@ -138,22 +132,24 @@ public class ProductController {
 					JOptionPane.showMessageDialog(null, "Product Deactivated Sucessfully!", "Deactivation",
 							JOptionPane.INFORMATION_MESSAGE);
 				}
+				
+				return new ModelAndView("redirect:/viewAllProductSeller");
 			}
-			
-			else {
-				JOptionPane.showMessageDialog(null, "Sorry, You do not have the permission unless the Product is activated by Admin!", "Deactivation",
-						JOptionPane.ERROR_MESSAGE);
-			}
-			
-			
-			
-		}
 
+			else {
+				JOptionPane.showMessageDialog(null,
+						"Sorry, You do not have the permission unless the Product is activated by Admin!",
+						"Deactivation", JOptionPane.ERROR_MESSAGE);
+				
+				return new ModelAndView("redirect:/viewAllProductSeller");
+
+			}
+
+		}
 		return new ModelAndView("redirect:/viewAllProductSeller");
 
-	}
-	
 
+	}
 
 	@RequestMapping(value = "/addProduct", method = RequestMethod.GET)
 	public ModelAndView addProduct(ModelAndView model) {

@@ -2,17 +2,10 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ include file="/WEB-INF/views/includes.jsp"%>
 <%
-	String mail = null;
-	String id = null;
-
-	if (session.getAttribute("email") == null) {
-		response.sendRedirect("/paf_project/");
+	if(session.getAttribute("emailAdmin") == null){
+		response.sendRedirect("/paf_project/admin");
 	}
 
-	else {
-		mail = session.getAttribute("email").toString();
-		//id = session.getAttribute("userID").toString();
-	}
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>

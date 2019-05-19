@@ -109,8 +109,18 @@ public class SellerController {
 	@RequestMapping(value = "/saveSeller", method = RequestMethod.POST)
 	public ModelAndView saveSeller(@ModelAttribute Seller seller) {
 		int x = dao.add(seller);
-		System.out.println(x);
-		return new ModelAndView("redirect:/viewAllSeller");
+		if(x == 2) {
+			JOptionPane.showMessageDialog(null, "Email already exists!", "Error",
+					JOptionPane.ERROR_MESSAGE);
+			return new ModelAndView("redirect:/addSeller");
+		}
+		
+		else {
+			JOptionPane.showMessageDialog(null, "You have been successfully registered!", "Error",
+					JOptionPane.INFORMATION_MESSAGE);
+			return new ModelAndView("redirect:/login");
+		}
+		
 	}
 
 	@RequestMapping(value = "/editSeller", method = RequestMethod.GET)
