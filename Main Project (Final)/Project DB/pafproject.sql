@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 16, 2019 at 03:08 AM
+-- Generation Time: May 19, 2019 at 12:47 PM
 -- Server version: 10.1.9-MariaDB
 -- PHP Version: 5.5.30
 
@@ -68,7 +68,8 @@ INSERT INTO `cart` (`lineID`, `cusID`, `addedDate`, `checkedDate`, `status`) VAL
 (7, 1, '2019-05-15 22:26:29', '2019-05-15 22:37:36', 'inactive'),
 (8, 1, '2019-05-15 22:39:51', '2019-05-15 22:39:56', 'inactive'),
 (9, 1, '2019-05-15 22:45:50', '2019-05-15 22:46:05', 'inactive'),
-(10, 1, '2019-05-15 22:49:08', '2019-05-15 22:49:18', 'inactive');
+(10, 1, '2019-05-15 22:49:08', '2019-05-15 22:49:18', 'inactive'),
+(11, 1, '2019-05-16 23:39:53', NULL, 'active');
 
 -- --------------------------------------------------------
 
@@ -100,7 +101,7 @@ INSERT INTO `cartitems` (`itemID`, `cartID`, `productID`, `qty`, `status`) VALUE
 (18, 5, 4, 2, NULL),
 (19, 6, 1, 5, NULL),
 (21, 7, 1, 1, 'pending'),
-(22, 7, 4, 3, 'shipped'),
+(22, 7, 4, 3, 'pending'),
 (23, 8, 3, 1, 'pending'),
 (24, 9, 3, 2, 'pending'),
 (25, 10, 1, 1, 'pending');
@@ -128,7 +129,7 @@ INSERT INTO `category` (`catID`, `description`, `catName`, `status`, `addedDate`
 (2, 'Test 3', 'Electronics', 'active', '2019-04-30'),
 (3, 'sdfsdfsdfsdf', 'Other', 'active', '2019-04-30'),
 (4, 'My Category Description', 'My Category 2', 'active', '2019-05-02'),
-(5, 'sd', 'sd', 'active', '2019-05-02'),
+(5, 'sd', 'sd', 'inactive', '2019-05-02'),
 (6, 'Cat Description', 'Cat1', 'active', '2019-05-03');
 
 -- --------------------------------------------------------
@@ -250,7 +251,7 @@ CREATE TABLE `product` (
 
 INSERT INTO `product` (`prID`, `suppID`, `name`, `description`, `unitPrice`, `brand`, `catID`, `prodImage`, `addedDate`, `status`, `admin`) VALUES
 (1, 1, 'Product 1', 'This is a testing Product 1', 120, 'Sony', 2, '/resources/images/products/wallpaper.jpg', '2019-05-14', 'active', 'active'),
-(3, 1, 'Sony Bravia 32', 'This is a testing Product 2', 125000, 'Sony', 2, '/resources/images/products/medicine.jpg', '2019-05-02', 'active', 'inactive'),
+(3, 1, 'Sony Bravia 32', 'This is a testing Product 2', 125000, 'Sony', 2, '/resources/images/products/medicine.jpg', '2019-05-02', 'active', 'active'),
 (4, 2, 'Sony Bravia 64', 'This is a testing Product 2', 265000, 'Sony', 1, '/resources/images/products/wallpaper.jpg', '2019-05-02', 'active', 'active');
 
 -- --------------------------------------------------------
@@ -385,7 +386,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `lineID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `lineID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `cartitems`
 --
